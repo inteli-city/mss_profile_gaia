@@ -1,5 +1,6 @@
 import pytest
 from src.modules.create_user.app.create_user_usecase import CreateUserUsecase
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.infra.repositories.user_repository_cognito_mock import UserRepositoryCognitoMock
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -19,6 +20,7 @@ class Test_CreateUserUsecase:
                 email="gabriel123@outlook.com",
                 name="Gabriel",
                 department="INTELICITY",
+                group=GROUP.USUARIO,
             )
     
     def test_create_user_usecase_requester_user_role_usuarios_not_trues(self):
@@ -33,6 +35,7 @@ class Test_CreateUserUsecase:
                 email="gabriel123@outlook.com",
                 name="Gabriel",
                 department="INTELICITY",
+                group=GROUP.USUARIO,
             )
     
     def test_create_user_usecase_requester_user_not_enabled(self):
@@ -47,6 +50,7 @@ class Test_CreateUserUsecase:
                 email="gabriel123@outlook.com",
                 name="Gabriel",
                 department="INTELICITY",
+                group=GROUP.USUARIO,
             )
 
     def test_create_user_usecase_not_in_cognito(self):
@@ -60,6 +64,7 @@ class Test_CreateUserUsecase:
             email="gabriel.godoybz@outlook.com",
             name="Gabriel",
             department="INTELICITY",
+            group=GROUP.USUARIO,
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
             role_dashboard_tempo=True,
@@ -85,6 +90,8 @@ class Test_CreateUserUsecase:
         assert user.email == "gabriel.godoybz@outlook.com"
         assert user.name == "Gabriel"
         assert user.department == "INTELICITY"
+        assert user.enabled == True
+        assert user.group == GROUP.USUARIO
         assert user.role_dashboard_qualidade == True
         assert user.role_dashboard_deteccao == True
         assert user.role_dashboard_tempo == True
@@ -118,12 +125,14 @@ class Test_CreateUserUsecase:
             email="gabriel123@outlook.com",
             name="Gabriel",
             department="INTELICITY",
+            group=GROUP.USUARIO,
         )
 
         assert user.user_id == "e73626b5-462d-4a3f-bef5-ae7cbb45e460"
         assert user.email == "gabriel123@outlook.com"
         assert user.name == "User Gabriel"
         assert user.enabled == True
+        assert user.group == GROUP.USUARIO
         assert user.department == "INTELICITY"
         assert user.role_dashboard_qualidade == None
         assert user.role_dashboard_deteccao == None
@@ -156,12 +165,14 @@ class Test_CreateUserUsecase:
             email="gabriel123@gmail.com",
             name="Gabriel",
             department="INTELICITY",
+            group=GROUP.USUARIO,
         )
 
         assert user.user_id == "e73626b5-462d-4a3f-bef5-ae7cbb45e459"
         assert user.email == "gabriel123@gmail.com"
         assert user.name == "User Gabriel"
         assert user.enabled == True
+        assert user.group == GROUP.USUARIO
         assert user.department == "INTELICITY"
         assert user.role_dashboard_qualidade == None
         assert user.role_dashboard_deteccao == None
@@ -194,12 +205,14 @@ class Test_CreateUserUsecase:
             email="gabriel@hotmail.com",
             name="Gabriel",
             department="INTELICITY",
+            group=GROUP.USUARIO,
         )
 
         assert user.user_id == "e73626b5-462d-4a3f-bef5-ae7cbb45e123"
         assert user.email == "gabriel@hotmail.com"
         assert user.name == "Gabriel"
         assert user.enabled == True
+        assert user.group == GROUP.USUARIO
         assert user.department == "INTELICITY"
         assert user.role_dashboard_qualidade == True
         assert user.role_dashboard_deteccao == True

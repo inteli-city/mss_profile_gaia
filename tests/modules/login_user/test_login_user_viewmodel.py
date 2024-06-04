@@ -1,5 +1,6 @@
 from src.modules.login_user.app.login_user_viewmodel import LoginUserViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 
 
 class Test_LoginUserViewmodel:
@@ -9,6 +10,7 @@ class Test_LoginUserViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -39,6 +41,7 @@ class Test_LoginUserViewmodel:
                 'email': 'v1zg0@example.com',
                 'name': 'Gabriel',
                 'enabled': True,
+                'group': 'USUARIO',
                 'department': 'INTELICITY',
                 'role_dashboard_qualidade': True,
                 'role_dashboard_deteccao': True,
@@ -72,6 +75,7 @@ class Test_LoginUserViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -102,6 +106,7 @@ class Test_LoginUserViewmodel:
             'email': 'v1zg0@example.com',
             'name': 'Gabriel',
             'enabled': True,
+            'group': 'USUARIO',
             'department': 'INTELICITY',
             'role_dashboard_qualidade': True,
             'role_dashboard_deteccao': True,

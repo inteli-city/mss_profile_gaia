@@ -1,5 +1,6 @@
 import pytest
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -43,6 +44,7 @@ class Test_UserRepositoryMock:
             email="gabriel.godoybz@gmail.com",
             name="User Teste",
             enabled=True,
+            group=GROUP.USUARIO,
         )
         user = repo.create_profile(
                 user=user_to_create
@@ -59,6 +61,7 @@ class Test_UserRepositoryMock:
                 "enabled": False,
                 "name": "User Teste",
                 "department": 'Teste',
+                "group": 'USUARIO',
                 "role_dashboard_qualidade": False,
                 "role_dashboard_deteccao": False,
                 "role_dashboard_tempo": False,

@@ -1,5 +1,6 @@
 from src.modules.update_user.app.update_user_viewmodel import UpdateUserViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -11,6 +12,7 @@ class Test_UpdateUserViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -41,6 +43,7 @@ class Test_UpdateUserViewmodel:
                 'email': 'v1zg0@example.com',
                 'name': 'Gabriel',
                 'enabled': True,
+                'group': 'USUARIO',
                 'department': 'INTELICITY',
                 'role_dashboard_qualidade': True,
                 'role_dashboard_deteccao': True,
@@ -74,6 +77,7 @@ class Test_UpdateUserViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -105,6 +109,7 @@ class Test_UpdateUserViewmodel:
             'name': 'Gabriel',
             'enabled': True,
             'department': 'INTELICITY',
+            'group': 'USUARIO',
             'role_dashboard_qualidade': True,
             'role_dashboard_deteccao': True,
             'role_dashboard_tempo': True,

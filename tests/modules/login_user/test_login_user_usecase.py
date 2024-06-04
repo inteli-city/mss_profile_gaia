@@ -1,5 +1,6 @@
 import pytest
 from src.modules.login_user.app.login_user_usecase import LoginUserUsecase
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.helpers.errors.domain_errors import EntityError
 from src.shared.helpers.errors.usecase_errors import DuplicatedItem, ForbiddenAction, InvalidCredentials
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
@@ -17,6 +18,7 @@ class Test_LoginUserUsecase:
         assert user.email == repo.users_list[1].email
         assert user.name == repo.users_list[1].name
         assert user.department == 'CONVIAS'
+        assert user.group == GROUP.USUARIO
         assert user.enabled == True
         assert user.role_dashboard_qualidade == None
         assert user.role_dashboard_deteccao == None

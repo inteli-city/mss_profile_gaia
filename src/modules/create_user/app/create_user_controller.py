@@ -1,3 +1,4 @@
+from src.shared.domain.enum.group_enum import GROUP
 from .create_user_usecase import CreateUserUsecase
 from .create_user_viewmodel import CreateUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
@@ -29,10 +30,17 @@ class CreateUserController:
             if request.data.get('department') is None:
                 raise MissingParameters('department')
             
+            if request.data.get('group') is None:
+                raise MissingParameters('group')
+            
+            if request.data.get('group') not in [enum.value for enum in GROUP]:
+                raise EntityError('group')
+            
             user = self.createUserController(
                 requester_user_id=requester_user.user_id,
                 email=request.data.get('email'),
                 name=request.data.get('name'),
+                group=GROUP[request.data.get('group')],
                 department=request.data.get('department'),
                 role_dashboard_qualidade=request.data.get('role_dashboard_qualidade'),
                 role_dashboard_deteccao=request.data.get('role_dashboard_deteccao'),

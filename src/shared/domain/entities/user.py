@@ -1,5 +1,6 @@
 import abc
 import re
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.helpers.errors.domain_errors import EntityError
 
 
@@ -7,6 +8,7 @@ class User(abc.ABC):
     user_id: str
     email: str
     name: str
+    group: GROUP
     department: str = None
     enabled: bool
     role_dashboard_qualidade: bool = None
@@ -34,6 +36,7 @@ class User(abc.ABC):
 
     def __init__(self, user_id: str, email: str, name: str,
             enabled: bool,
+            group: GROUP,
             department: str = None,
             role_dashboard_qualidade: bool = None,
             role_dashboard_deteccao: bool = None,
@@ -71,6 +74,10 @@ class User(abc.ABC):
         if type(enabled) is not bool:
             raise EntityError("enabled")
         self.enabled = enabled
+
+        if type(group) is not GROUP:
+            raise EntityError("group")
+        self.group = group
 
         if department is not None:
             if type(department) != str:
