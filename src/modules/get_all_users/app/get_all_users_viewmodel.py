@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 
 
 class UserViewmodel:
@@ -8,6 +9,7 @@ class UserViewmodel:
     email: str
     name: str
     enabled: bool
+    group: GROUP
     department: str
     role_dashboard_qualidade: bool = None
     role_dashboard_deteccao: bool = None
@@ -34,6 +36,7 @@ class UserViewmodel:
         self.email = user.email
         self.name = user.name
         self.enabled = user.enabled
+        self.group = user.group
         self.department = user.department
         self.role_dashboard_qualidade = user.role_dashboard_qualidade
         self.role_dashboard_deteccao = user.role_dashboard_deteccao
@@ -61,6 +64,7 @@ class UserViewmodel:
             'email': self.email,
             'name': self.name,
             'department': self.department,
+            'group': self.group.value,
             'enabled': self.enabled,
             'role_dashboard_qualidade': self.role_dashboard_qualidade,
             'role_dashboard_deteccao': self.role_dashboard_deteccao,

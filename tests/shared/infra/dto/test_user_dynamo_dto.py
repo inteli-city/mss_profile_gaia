@@ -1,3 +1,4 @@
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.infra.dtos.user_dynamo_dto import UserDynamoDTO
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -14,6 +15,7 @@ class Test_UserDynamoDto:
             name='Gabriel',
             enabled=True,
             department='INTELICITY',
+            group=GROUP.USUARIO,
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
             role_dashboard_tempo=True,
@@ -45,6 +47,7 @@ class Test_UserDynamoDto:
             email="gabriel@hotmail.com",
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -74,6 +77,7 @@ class Test_UserDynamoDto:
             'email': "gabriel@hotmail.com",
             'name': 'Gabriel',
             'enabled': True,
+            'group': 'USUARIO',
             'department': 'INTELICITY',
             'role_dashboard_qualidade': True,
             'role_dashboard_deteccao': True,
@@ -100,6 +104,7 @@ class Test_UserDynamoDto:
         dynamo_dict = {'Item': {'name': 'Gabriel Godoy',
                                 'email' : 'gab.godoy@gmail.com',
                                 'user_id': '93bc6ada-c0d1-7054-66ab-e17414c48abb',
+                                'group': 'USUARIO',
                                 'role_dashboard_qualidade': "true",
                                 'role_dashboard_deteccao': "true",
                                 'role_dashboard_tempo': "true",
@@ -137,6 +142,7 @@ class Test_UserDynamoDto:
             email="gab.godoy@gmail.com",
             name='Gabriel Godoy',
             enabled=True,
+            group=GROUP.USUARIO,
             department=None,
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -169,6 +175,7 @@ class Test_UserDynamoDto:
             email="gab.godoy@gmail.com",
             name='Gabriel Godoy',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -197,6 +204,7 @@ class Test_UserDynamoDto:
         assert user.email == user_dto.email
         assert user.name == user_dto.name
         assert user.enabled == user_dto.enabled
+        assert user.group == user_dto.group
         assert user.department == user_dto.department
         assert user.role_dashboard_qualidade == user_dto.role_dashboard_qualidade
         assert user.role_dashboard_deteccao == user_dto.role_dashboard_deteccao

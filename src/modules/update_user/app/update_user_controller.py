@@ -1,4 +1,5 @@
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.infra.dtos.user_gaia_api_gateway_dto import UserGaiaApiGatewayDTO
 from .update_user_usecase import UpdateUserUsecase
 from .update_user_viewmodel import UpdateUserViewmodel
@@ -13,7 +14,7 @@ class UpdateUserController:
 
     def __init__(self, usecase: UpdateUserUsecase):
         self.UpdateUserUsecase = usecase
-        self.mutable_fields = ['name', 'department', 'enabled', 'role_dashboard_qualidade', 'role_dashboard_deteccao', 'role_dashboard_tempo', 'role_dashboard_geoinfra', 'role_dashboard_recapeamento', 'role_dashboard_anel_viario', 'role_dashboard_sist_unificado', 'role_modfisc_convias', 'role_modfisc_osmv', 'role_modfisc_osct', 'role_modfisc_relatoriomv', 'role_modfisc_vistoriapv', 'role_modfisc_vistoriarecape', 'role_interf_mapa', 'role_interf_protproc', 'role_drenagem_ativos', 'role_drenagem_redes', 'role_usuarios', 'role_tickets']
+        self.mutable_fields = ['name', 'department', 'group', 'enabled', 'role_dashboard_qualidade', 'role_dashboard_deteccao', 'role_dashboard_tempo', 'role_dashboard_geoinfra', 'role_dashboard_recapeamento', 'role_dashboard_anel_viario', 'role_dashboard_sist_unificado', 'role_modfisc_convias', 'role_modfisc_osmv', 'role_modfisc_osct', 'role_modfisc_relatoriomv', 'role_modfisc_vistoriapv', 'role_modfisc_vistoriarecape', 'role_interf_mapa', 'role_interf_protproc', 'role_drenagem_ativos', 'role_drenagem_redes', 'role_usuarios', 'role_tickets']
     
     def __call__(self, request: IRequest) -> IResponse:
         try:
@@ -24,6 +25,9 @@ class UpdateUserController:
             
             if request.data.get('user_id') is None:
                 raise MissingParameters('user_id')
+            
+            if request.data.get('group') is not None and request.data.get('group') not in [enum.value for enum in GROUP]:
+                raise MissingParameters('group')
             
             user_data = {k: v for k, v in request.data.items() if k in self.mutable_fields}
 

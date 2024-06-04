@@ -1,5 +1,6 @@
 from src.modules.get_all_users.app.get_all_users_viewmodel import GetAllUsersViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -10,6 +11,7 @@ class Test_GetAllUsersViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -41,6 +43,7 @@ class Test_GetAllUsersViewmodel:
                         'email': 'v1zg0@example.com',
                         'name': 'Gabriel',
                         'enabled': True,
+                        'group': 'USUARIO',
                         'department': 'INTELICITY',
                         'role_dashboard_qualidade': True,
                         'role_dashboard_deteccao': True,
@@ -75,6 +78,7 @@ class Test_GetAllUsersViewmodel:
             email='v1zg0@example.com',
             name='Gabriel',
             enabled=True,
+            group=GROUP.USUARIO,
             department='INTELICITY',
             role_dashboard_qualidade=True,
             role_dashboard_deteccao=True,
@@ -105,6 +109,7 @@ class Test_GetAllUsersViewmodel:
             'email': 'v1zg0@example.com',
             'name': 'Gabriel',
             'enabled': True,
+            'group': 'USUARIO',
             'department': 'INTELICITY',
             'role_dashboard_qualidade': True,
             'role_dashboard_deteccao': True,

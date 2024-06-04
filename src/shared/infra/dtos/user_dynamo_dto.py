@@ -1,5 +1,6 @@
 from typing import Optional
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 
 
 class UserDynamoDTO:
@@ -7,6 +8,7 @@ class UserDynamoDTO:
     email: str
     name: str
     enabled: bool
+    group: GROUP
     department: Optional[str] = None
     role_dashboard_qualidade: Optional[bool] = None
     role_dashboard_deteccao: Optional[bool] = None
@@ -29,7 +31,7 @@ class UserDynamoDTO:
     role_tickets: Optional[bool] = None
 
 
-    def __init__(self, user_id: str, email: str, name: str, enabled: bool, department: Optional[str] = None,
+    def __init__(self, user_id: str, email: str, name: str, enabled: bool, group: GROUP, department: Optional[str] = None,
                  role_dashboard_qualidade: Optional[bool] = None, role_dashboard_deteccao: Optional[bool] = None,
                  role_dashboard_tempo: Optional[bool] = None, role_dashboard_geoinfra: Optional[bool] = None,
                  role_dashboard_recapeamento: Optional[bool] = None, role_dashboard_anel_viario: Optional[bool] = None,
@@ -44,6 +46,7 @@ class UserDynamoDTO:
         self.name = name
         self.user_id = user_id
         self.enabled = enabled
+        self.group = group
         self.department = department
         self.role_dashboard_qualidade = role_dashboard_qualidade
         self.role_dashboard_deteccao = role_dashboard_deteccao
@@ -72,6 +75,7 @@ class UserDynamoDTO:
             name=user.name,
             user_id=user.user_id,
             enabled=user.enabled,
+            group=user.group,
             department=user.department,
             role_dashboard_qualidade=user.role_dashboard_qualidade,
             role_dashboard_deteccao=user.role_dashboard_deteccao,
@@ -103,6 +107,7 @@ class UserDynamoDTO:
             "email": self.email,
             "user_id": self.user_id,
             "enabled": self.enabled,
+            "group": self.group.value,
             "department": self.department,
             "role_dashboard_qualidade": self.role_dashboard_qualidade,
             "role_dashboard_deteccao": self.role_dashboard_deteccao,
@@ -125,8 +130,6 @@ class UserDynamoDTO:
             "role_tickets": self.role_tickets
         }
 
-        # data_without_none_values = {k: v for k, v in data.items() if v is not None}
-
         return data
 
     @staticmethod
@@ -140,6 +143,7 @@ class UserDynamoDTO:
             email=str(user_data["email"]),
             user_id=str(user_data["user_id"]),
             enabled=bool(user_data["enabled"]),
+            group=GROUP(user_data["group"]),
             department=str(user_data["department"]) if "department" in user_data else None,
             role_dashboard_qualidade=bool(user_data["role_dashboard_qualidade"]) if "role_dashboard_qualidade" in user_data else None,
             role_dashboard_deteccao=bool(user_data["role_dashboard_deteccao"]) if "role_dashboard_deteccao" in user_data else None,
@@ -171,6 +175,7 @@ class UserDynamoDTO:
             email=self.email,
             user_id=self.user_id,
             enabled=self.enabled,
+            group=self.group,
             department=self.department,
             role_dashboard_qualidade=self.role_dashboard_qualidade,
             role_dashboard_deteccao=self.role_dashboard_deteccao,
@@ -194,7 +199,7 @@ class UserDynamoDTO:
         )
     
     def __repr__(self):
-        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, enabled={self.enabled}, department={self.department}, role_dashboard_qualidade={self.role_dashboard_qualidade}, role_dashboard_deteccao={self.role_dashboard_deteccao}, role_dashboard_tempo={self.role_dashboard_tempo}, role_dashboard_geoinfra={self.role_dashboard_geoinfra}, role_dashboard_recapeamento={self.role_dashboard_recapeamento}, role_dashboard_anel_viario={self.role_dashboard_anel_viario}, role_dashboard_sist_unificado={self.role_dashboard_sist_unificado}, role_modfisc_convias={self.role_modfisc_convias}, role_modfisc_osmv={self.role_modfisc_osmv}, role_modfisc_osct={self.role_modfisc_osct}, role_modfisc_relatoriomv={self.role_modfisc_relatoriomv}, role_modfisc_vistoriapv={self.role_modfisc_vistoriapv}, role_modfisc_vistoriarecape={self.role_modfisc_vistoriarecape}, role_interf_mapa={self.role_interf_mapa}, role_interf_protproc={self.role_interf_protproc}, role_drenagem_ativos={self.role_drenagem_ativos}, role_drenagem_redes={self.role_drenagem_redes}, role_usuarios={self.role_usuarios}, role_tickets={self.role_tickets})"
+        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, enabled={self.enabled}, group={self.group.value}, department={self.department}, role_dashboard_qualidade={self.role_dashboard_qualidade}, role_dashboard_deteccao={self.role_dashboard_deteccao}, role_dashboard_tempo={self.role_dashboard_tempo}, role_dashboard_geoinfra={self.role_dashboard_geoinfra}, role_dashboard_recapeamento={self.role_dashboard_recapeamento}, role_dashboard_anel_viario={self.role_dashboard_anel_viario}, role_dashboard_sist_unificado={self.role_dashboard_sist_unificado}, role_modfisc_convias={self.role_modfisc_convias}, role_modfisc_osmv={self.role_modfisc_osmv}, role_modfisc_osct={self.role_modfisc_osct}, role_modfisc_relatoriomv={self.role_modfisc_relatoriomv}, role_modfisc_vistoriapv={self.role_modfisc_vistoriapv}, role_modfisc_vistoriarecape={self.role_modfisc_vistoriarecape}, role_interf_mapa={self.role_interf_mapa}, role_interf_protproc={self.role_interf_protproc}, role_drenagem_ativos={self.role_drenagem_ativos}, role_drenagem_redes={self.role_drenagem_redes}, role_usuarios={self.role_usuarios}, role_tickets={self.role_tickets})"
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__

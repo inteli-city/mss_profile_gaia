@@ -24,6 +24,7 @@ class Test_CreateUserController:
             'name': 'User Teste',
             'enabled': False,
             'department': 'INTELICITY',
+            'group': 'USUARIO',
             'role_dashboard_qualidade': False,
             'role_dashboard_deteccao': False,
             'role_dashboard_tempo': False,
@@ -52,6 +53,7 @@ class Test_CreateUserController:
         assert response.body["user"]['email'] == "gabriel.godoybz@outlook.com"
         assert response.body["user"]['name'] == "User Teste"
         assert response.body["user"]['department'] == "INTELICITY"
+        assert response.body["user"]['group'] == "USUARIO"
         assert response.body["user"]['role_dashboard_qualidade'] == False
         assert response.body["user"]['role_dashboard_deteccao'] == False
         assert response.body["user"]['role_dashboard_tempo'] == False

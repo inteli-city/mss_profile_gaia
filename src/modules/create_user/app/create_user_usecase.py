@@ -1,4 +1,5 @@
 from src.shared.domain.entities.user import User
+from src.shared.domain.enum.group_enum import GROUP
 from src.shared.domain.repositories.user_repository_cognito_interface import IUserRepositoryCognito
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -14,6 +15,7 @@ class CreateUserUsecase:
                 email: str, 
                 name: str, 
                 department: str, 
+                group: GROUP,
                 role_dashboard_qualidade: bool = None, 
                 role_dashboard_deteccao: bool = None,
                 role_dashboard_tempo: bool = None,
@@ -60,6 +62,7 @@ class CreateUserUsecase:
                 email=user_cognito.email,
                 name=user_cognito.name,
                 enabled=True,
+                group=group,
                 department=department,
                 role_dashboard_qualidade=role_dashboard_qualidade,
                 role_dashboard_deteccao=role_dashboard_deteccao,
