@@ -1,4 +1,5 @@
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from .create_user_usecase import CreateUserUsecase
 from .create_user_viewmodel import CreateUserViewmodel
 from src.shared.helpers.errors.controller_errors import MissingParameters
@@ -36,6 +37,10 @@ class CreateUserController:
             if request.data.get('group') not in [enum.value for enum in GROUP]:
                 raise EntityError('group')
             
+            if request.data.get('role_recape') is not None:
+                if request.data.get('role_recape') not in [enum.value for enum in ROLE_RECAPE]:
+                    raise EntityError('role_recape')
+            
             user = self.createUserController(
                 requester_user_id=requester_user.user_id,
                 email=request.data.get('email'),
@@ -61,6 +66,7 @@ class CreateUserController:
                 role_drenagem_redes=request.data.get('role_drenagem_redes'),
                 role_usuarios=request.data.get('role_usuarios'),
                 role_tickets=request.data.get('role_tickets'),
+                role_recape=None if request.data.get('role_recape') is None else ROLE_RECAPE[request.data.get('role_recape')]
             )
 
             viewmodel = CreateUserViewmodel(user)

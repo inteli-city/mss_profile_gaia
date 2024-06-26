@@ -1,0 +1,8 @@
+from enum import Enum
+
+
+class ROLE_RECAPE(Enum):
+    ADMIN = 'ADMIN'
+    CONVIAS_VIEW = 'CONVIAS_VIEW'
+    CONVIAS_EDIT = 'CONVIAS_EDIT'
+    FISCALIZACAO = 'FISCALIZACAO'

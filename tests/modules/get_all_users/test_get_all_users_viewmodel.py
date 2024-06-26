@@ -1,6 +1,7 @@
 from src.modules.get_all_users.app.get_all_users_viewmodel import GetAllUsersViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -63,7 +64,8 @@ class Test_GetAllUsersViewmodel:
                         'role_drenagem_ativos': True,
                         'role_drenagem_redes': True,
                         'role_usuarios': True,
-                        'role_tickets': True
+                        'role_tickets': True,
+                        'role_recape': None,
                     }
                 ],
             'message': 'Usuários retornados com sucesso!'
@@ -99,6 +101,7 @@ class Test_GetAllUsersViewmodel:
             role_drenagem_redes=True,
             role_usuarios=True,
             role_tickets=True,
+            role_recape=ROLE_RECAPE.CONVIAS_EDIT,
         )
         )
 
@@ -129,7 +132,8 @@ class Test_GetAllUsersViewmodel:
             'role_drenagem_ativos': True,
             'role_drenagem_redes': True,
             'role_usuarios': True,
-            'role_tickets': True
+            'role_tickets': True,
+            'role_recape': 'CONVIAS_EDIT',
         }
     
         assert response == data

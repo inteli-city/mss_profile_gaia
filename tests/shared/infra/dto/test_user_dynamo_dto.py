@@ -1,4 +1,5 @@
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.infra.dtos.user_dynamo_dto import UserDynamoDTO
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
@@ -34,7 +35,8 @@ class Test_UserDynamoDto:
             role_drenagem_ativos=True,
             role_drenagem_redes=True,
             role_usuarios=True,
-            role_tickets=True
+            role_tickets=True,
+            role_recape=ROLE_RECAPE.ADMIN
         )
 
         assert user_dto == expected_user_dto

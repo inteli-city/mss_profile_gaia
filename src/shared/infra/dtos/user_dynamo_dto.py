@@ -1,6 +1,7 @@
 from typing import Optional
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 
 
 class UserDynamoDTO:
@@ -29,6 +30,7 @@ class UserDynamoDTO:
     role_drenagem_redes: Optional[bool] = None
     role_usuarios: Optional[bool] = None
     role_tickets: Optional[bool] = None
+    role_recape: Optional[ROLE_RECAPE] = None
 
 
     def __init__(self, user_id: str, email: str, name: str, enabled: bool, group: GROUP, department: Optional[str] = None,
@@ -41,7 +43,7 @@ class UserDynamoDTO:
                  role_modfisc_vistoriarecape: Optional[bool] = None, role_interf_mapa: Optional[bool] = None,
                  role_interf_protproc: Optional[bool] = None, role_drenagem_ativos: Optional[bool] = None,
                  role_drenagem_redes: Optional[bool] = None, role_usuarios: Optional[bool] = None,
-                 role_tickets: Optional[bool] = None):
+                 role_tickets: Optional[bool] = None, role_recape: Optional[ROLE_RECAPE] = None):
         self.email = email
         self.name = name
         self.user_id = user_id
@@ -67,6 +69,7 @@ class UserDynamoDTO:
         self.role_drenagem_redes = role_drenagem_redes
         self.role_usuarios = role_usuarios
         self.role_tickets = role_tickets
+        self.role_recape = role_recape
 
     @staticmethod
     def from_entity(user: User):
@@ -95,7 +98,8 @@ class UserDynamoDTO:
             role_drenagem_ativos=user.role_drenagem_ativos,
             role_drenagem_redes=user.role_drenagem_redes,
             role_usuarios=user.role_usuarios,
-            role_tickets=user.role_tickets
+            role_tickets=user.role_tickets,
+            role_recape=user.role_recape
         )
 
     def to_dynamo(self) -> dict:
@@ -127,7 +131,8 @@ class UserDynamoDTO:
             "role_drenagem_ativos": self.role_drenagem_ativos,
             "role_drenagem_redes": self.role_drenagem_redes,
             "role_usuarios": self.role_usuarios,
-            "role_tickets": self.role_tickets
+            "role_tickets": self.role_tickets,
+            "role_recape": self.role_recape.value if self.role_recape is not None else None
         }
 
         return data
@@ -163,7 +168,8 @@ class UserDynamoDTO:
             role_drenagem_ativos=bool(user_data["role_drenagem_ativos"]) if "role_drenagem_ativos" in user_data else None,
             role_drenagem_redes=bool(user_data["role_drenagem_redes"]) if "role_drenagem_redes" in user_data else None,
             role_usuarios=bool(user_data["role_usuarios"]) if "role_usuarios" in user_data else None,
-            role_tickets=bool(user_data["role_tickets"]) if "role_tickets" in user_data else None
+            role_tickets=bool(user_data["role_tickets"]) if "role_tickets" in user_data else None,
+            role_recape=ROLE_RECAPE(user_data["role_recape"]) if "role_recape" in user_data else None
         )
     
     def to_entity(self) -> User:
@@ -195,11 +201,12 @@ class UserDynamoDTO:
             role_drenagem_ativos=self.role_drenagem_ativos,
             role_drenagem_redes=self.role_drenagem_redes,
             role_usuarios=self.role_usuarios,
-            role_tickets=self.role_tickets
+            role_tickets=self.role_tickets,
+            role_recape=self.role_recape
         )
     
     def __repr__(self):
-        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, enabled={self.enabled}, group={self.group.value}, department={self.department}, role_dashboard_qualidade={self.role_dashboard_qualidade}, role_dashboard_deteccao={self.role_dashboard_deteccao}, role_dashboard_tempo={self.role_dashboard_tempo}, role_dashboard_geoinfra={self.role_dashboard_geoinfra}, role_dashboard_recapeamento={self.role_dashboard_recapeamento}, role_dashboard_anel_viario={self.role_dashboard_anel_viario}, role_dashboard_sist_unificado={self.role_dashboard_sist_unificado}, role_modfisc_convias={self.role_modfisc_convias}, role_modfisc_osmv={self.role_modfisc_osmv}, role_modfisc_osct={self.role_modfisc_osct}, role_modfisc_relatoriomv={self.role_modfisc_relatoriomv}, role_modfisc_vistoriapv={self.role_modfisc_vistoriapv}, role_modfisc_vistoriarecape={self.role_modfisc_vistoriarecape}, role_interf_mapa={self.role_interf_mapa}, role_interf_protproc={self.role_interf_protproc}, role_drenagem_ativos={self.role_drenagem_ativos}, role_drenagem_redes={self.role_drenagem_redes}, role_usuarios={self.role_usuarios}, role_tickets={self.role_tickets})"
+        return f"UserDynamoDto(name={self.name}, email={self.email}, user_id={self.user_id}, enabled={self.enabled}, group={self.group.value}, department={self.department}, role_dashboard_qualidade={self.role_dashboard_qualidade}, role_dashboard_deteccao={self.role_dashboard_deteccao}, role_dashboard_tempo={self.role_dashboard_tempo}, role_dashboard_geoinfra={self.role_dashboard_geoinfra}, role_dashboard_recapeamento={self.role_dashboard_recapeamento}, role_dashboard_anel_viario={self.role_dashboard_anel_viario}, role_dashboard_sist_unificado={self.role_dashboard_sist_unificado}, role_modfisc_convias={self.role_modfisc_convias}, role_modfisc_osmv={self.role_modfisc_osmv}, role_modfisc_osct={self.role_modfisc_osct}, role_modfisc_relatoriomv={self.role_modfisc_relatoriomv}, role_modfisc_vistoriapv={self.role_modfisc_vistoriapv}, role_modfisc_vistoriarecape={self.role_modfisc_vistoriarecape}, role_interf_mapa={self.role_interf_mapa}, role_interf_protproc={self.role_interf_protproc}, role_drenagem_ativos={self.role_drenagem_ativos}, role_drenagem_redes={self.role_drenagem_redes}, role_usuarios={self.role_usuarios}, role_tickets={self.role_tickets}, role_recape={self.role_recape.value if self.role_recape is not None else None})"
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
