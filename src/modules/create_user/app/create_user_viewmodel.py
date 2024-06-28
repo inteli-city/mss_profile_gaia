@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 
 
 class UserViewmodel:
@@ -30,6 +31,7 @@ class UserViewmodel:
     role_drenagem_redes: bool = None
     role_usuarios: bool = None
     role_tickets: bool = None
+    role_recape: ROLE_RECAPE = None
 
     def __init__(self, user: User):
         self.user_id = user.user_id
@@ -57,6 +59,7 @@ class UserViewmodel:
         self.role_drenagem_redes = user.role_drenagem_redes
         self.role_usuarios = user.role_usuarios
         self.role_tickets = user.role_tickets
+        self.role_recape = user.role_recape
 
     def to_dict(self):
         return {
@@ -85,6 +88,7 @@ class UserViewmodel:
             'role_drenagem_redes': self.role_drenagem_redes,
             'role_usuarios': self.role_usuarios,
             'role_tickets': self.role_tickets,
+            'role_recape': self.role_recape.value if self.role_recape is not None else None,
         }
 
 class CreateUserViewmodel:

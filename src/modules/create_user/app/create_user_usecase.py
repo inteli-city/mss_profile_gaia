@@ -1,5 +1,6 @@
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.domain.repositories.user_repository_cognito_interface import IUserRepositoryCognito
 from src.shared.domain.repositories.user_repository_interface import IUserRepository
 from src.shared.helpers.errors.usecase_errors import ForbiddenAction, NoItemsFound
@@ -35,6 +36,7 @@ class CreateUserUsecase:
                 role_drenagem_redes: bool = None,
                 role_usuarios: bool = None,
                 role_tickets: bool = None,
+                role_recape: ROLE_RECAPE = None
             ) -> User:
         
         # valida se requester esta autorizado
@@ -83,6 +85,7 @@ class CreateUserUsecase:
                 role_drenagem_redes=role_drenagem_redes,
                 role_usuarios=role_usuarios,
                 role_tickets=role_tickets,
+                role_recape=role_recape
             )
 
         user = self.repo.get_user_by_id(user_id=user_cognito.user_id)
