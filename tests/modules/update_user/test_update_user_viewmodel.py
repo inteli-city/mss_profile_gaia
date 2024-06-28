@@ -1,6 +1,7 @@
 from src.modules.update_user.app.update_user_viewmodel import UpdateUserViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.infra.repositories.user_repository_mock import UserRepositoryMock
 
 
@@ -63,7 +64,8 @@ class Test_UpdateUserViewmodel:
                 'role_drenagem_ativos': True,
                 'role_drenagem_redes': True,
                 'role_usuarios': True,
-                'role_tickets': True
+                'role_tickets': True,
+                'role_recape': None,
             },
             'message': 'Usuário atualizado com sucesso!',
         }
@@ -98,6 +100,7 @@ class Test_UpdateUserViewmodel:
             role_drenagem_redes=True,
             role_usuarios=True,
             role_tickets=True,
+            role_recape=ROLE_RECAPE.ADMIN
            )
         )
 
@@ -128,7 +131,8 @@ class Test_UpdateUserViewmodel:
             'role_drenagem_ativos': True,
             'role_drenagem_redes': True,
             'role_usuarios': True,
-            'role_tickets': True
+            'role_tickets': True,
+            'role_recape': 'ADMIN',
         }
     
         assert response == data

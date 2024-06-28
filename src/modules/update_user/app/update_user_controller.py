@@ -1,5 +1,6 @@
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.infra.dtos.user_gaia_api_gateway_dto import UserGaiaApiGatewayDTO
 from .update_user_usecase import UpdateUserUsecase
 from .update_user_viewmodel import UpdateUserViewmodel
@@ -27,7 +28,11 @@ class UpdateUserController:
                 raise MissingParameters('user_id')
             
             if request.data.get('group') is not None and request.data.get('group') not in [enum.value for enum in GROUP]:
-                raise MissingParameters('group')
+                raise EntityError('group')
+            
+            if request.data.get('role_recape') is not None:
+                if request.data.get('role_recape') not in [enum.value for enum in ROLE_RECAPE]:
+                    raise EntityError('role_recape')
             
             user_data = {k: v for k, v in request.data.items() if k in self.mutable_fields}
 

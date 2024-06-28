@@ -1,6 +1,7 @@
 from src.modules.login_user.app.login_user_viewmodel import LoginUserViewmodel, UserViewmodel
 from src.shared.domain.entities.user import User
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 
 
 class Test_LoginUserViewmodel:
@@ -61,7 +62,8 @@ class Test_LoginUserViewmodel:
                 'role_drenagem_ativos': True,
                 'role_drenagem_redes': True,
                 'role_usuarios': True,
-                'role_tickets': True
+                'role_tickets': True,
+                'role_recape': None,
             },
             'message': 'Login realizado com sucesso!',
         }
@@ -96,6 +98,7 @@ class Test_LoginUserViewmodel:
             role_drenagem_redes=True,
             role_usuarios=True,
             role_tickets=True,
+            role_recape=ROLE_RECAPE.FISCALIZACAO,
         )
         )
 
@@ -126,7 +129,8 @@ class Test_LoginUserViewmodel:
             'role_drenagem_ativos': True,
             'role_drenagem_redes': True,
             'role_usuarios': True,
-            'role_tickets': True
+            'role_tickets': True,
+            'role_recape': 'FISCALIZACAO',
         }
     
         assert response == data

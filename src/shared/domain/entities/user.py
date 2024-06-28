@@ -1,6 +1,7 @@
 import abc
 import re
 from src.shared.domain.enum.group_enum import GROUP
+from src.shared.domain.enum.role_recape_enum import ROLE_RECAPE
 from src.shared.helpers.errors.domain_errors import EntityError
 
 
@@ -30,6 +31,7 @@ class User(abc.ABC):
     role_drenagem_redes: bool = None
     role_usuarios: bool = None
     role_tickets: bool = None
+    role_recape: ROLE_RECAPE = None
 
     MIN_NAME_LENGTH = 2
     USER_ID_LENGTH = 36
@@ -57,6 +59,7 @@ class User(abc.ABC):
             role_drenagem_redes: bool = None,
             role_usuarios: bool = None,
             role_tickets: bool = None,
+            role_recape: ROLE_RECAPE = None,
         ):
 
         if not User.validate_user_id(user_id):
@@ -179,7 +182,10 @@ class User(abc.ABC):
                 raise EntityError("role_tickets")
         self.role_tickets = role_tickets
 
-
+        if role_recape is not None:
+            if type(role_recape) != ROLE_RECAPE:
+                raise EntityError("role_recape")
+        self.role_recape = role_recape
 
     @staticmethod
     def validate_email(email) -> bool:
